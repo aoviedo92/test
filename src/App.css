@@ -1,1 +1,12 @@
+.bc {
+  border: 1px solid black;
+}
+.bc1 {
+  border: 1px solid red;
+}
+.table {
 
+}
+.table thead {
+  background-color: #eee;
+}
