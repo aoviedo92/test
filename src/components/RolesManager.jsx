@@ -25,8 +25,13 @@ export class RolesManager extends Component {
     })
   }
   handleToggleFullEntity(entity, hasPerm) {
-    console.log(entity, hasPerm)
     entity.permissions.forEach(perm => this.handleToggleFullPerm(entity, perm, hasPerm));
+  }
+  handleToggleFullRoleRow(role, hasPerm) {
+    this.state.entities.forEach(entity => entity.permissions.forEach(permToToggle => {
+      role.togglePerm(entity, permToToggle, hasPerm);
+      this.handleUpdRole(role);
+    }))
   }
   /**
    * @type Role
@@ -53,7 +58,10 @@ export class RolesManager extends Component {
       </tr>
       </thead>
       <tbody>
-        <RoleRow entities={this.state.entities} roles={this.state.roles} onUpdRole={(role) => this.handleUpdRole(role)}/>
+        <RoleRow entities={this.state.entities}
+                 roles={this.state.roles}
+                 onToggleFullRoleRow={(role, hasPerm)=>this.handleToggleFullRoleRow(role, hasPerm)}
+                 onUpdRole={(role) => this.handleUpdRole(role)}/>
       </tbody>
     </table>
   }
