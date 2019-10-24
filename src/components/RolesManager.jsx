@@ -1,27 +1,59 @@
 import React, {Component} from "react";
-import {Entity} from "./Entity";
-import {RoleFromEntity} from "./RoleFromEntity";
-import {Role} from "./Role";
+import EntityHeader from "./Entity";
+import PermFromEntity from "./PermFromEntity";
+import RoleRow from "./Role";
+import {PERMISSIONS, ROLES} from "../mockData";
+import {Entity, Role} from "../models";
 
 export class RolesManager extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      entities: [],
+      roles: []
+    };
   }
-
+  componentDidMount() {
+    const entities = PERMISSIONS.map(p => new Entity(p));
+    const roles = ROLES.map(r => new Role(r));
+    this.setState({entities, roles})
+  }
+  handleToggleFullPerm(entity, permToToggle, hasPerm) {
+    this.state.roles.forEach(role => {
+      role.togglePerm(entity, permToToggle, hasPerm);
+      this.handleUpdRole(role)
+    })
+  }
+  handleToggleFullEntity(entity, hasPerm) {
+    console.log(entity, hasPerm)
+    entity.permissions.forEach(perm => this.handleToggleFullPerm(entity, perm, hasPerm));
+  }
+  /**
+   * @type Role
+   * */
+  handleUpdRole(role) {
+    // console.log('handleUpdRole',role)
+    const roleIndex = this.state.roles.findIndex(r => r.id === role.id);
+    this.setState(state => {
+      if (roleIndex !== -1) {
+        state.roles[roleIndex] = role;
+      }
+      return {roles: state.roles, entities: state.entities}
+    })
+  }
   render() {
     return <table className="table">
       <thead>
       <tr className="bc">
         <th rowSpan="2" className="bc1">Roles</th>
-        <Entity entities={this.props.entities}/>
+        <EntityHeader entities={this.state.entities} onToggleFullEntity={(entity, hasPerm)=>this.handleToggleFullEntity(entity, hasPerm)} />
       </tr>
       <tr>
-        <RoleFromEntity entities={this.props.entities} />
+        <PermFromEntity entities={this.state.entities} onToggleFullPerm={(entity, permToToggle, hasPerm) => this.handleToggleFullPerm(entity, permToToggle, hasPerm)}/>
       </tr>
       </thead>
       <tbody>
-        <Role entities={this.props.entities} roles={this.props.roles} />
+        <RoleRow entities={this.state.entities} roles={this.state.roles} onUpdRole={(role) => this.handleUpdRole(role)}/>
       </tbody>
     </table>
   }

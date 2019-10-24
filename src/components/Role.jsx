@@ -2,24 +2,26 @@ import React, {Component} from "react";
 import {ToggleablePerm} from "./ToggleablePerm";
 
 
-export class Role extends Component {
+export default class Role extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  handleTogglePerm(role, entity, hasPerm) {
-    console.log(role, entity, hasPerm)
+  handleTogglePerm(role, entity, permToToggle, hasPerm) {
+    role.togglePerm(entity, permToToggle, hasPerm);
+    this.props.onUpdRole(role);
+    // console.log(role, entity, permToToggle, hasPerm)
   }
   render() {
     return this.props.roles.map(role => {
       return (
         <tr key={role.id}>
-          <td>{role.name}</td>
-          {this.props.entities.map((entity, index) => entity.permissions.map((eP, i) => {
+          <td>{role.name} ({role.amountPerms})</td>
+          {this.props.entities.map((entity, index) => entity.permissions.map((permToToggle, i) => {
             const hasPerm = role.hasPerm(entity);
             const key = `${role.name}-${entity.entity}-${index}-${i}`;
-            return <ToggleablePerm key={key} hasPerm={hasPerm} onTogglePerm={()=>this.handleTogglePerm(role, entity, !hasPerm)}/>
+            return <ToggleablePerm key={key} hasPerm={hasPerm} onTogglePerm={()=>this.handleTogglePerm(role, entity, permToToggle, !hasPerm)}/>
           })
         )}
         </tr>

@@ -1,11 +1,11 @@
 export class Entity {
-  ENTITY_SEP = ':';
-  PERM_SEP = '_';
+  static ENTITY_SEP = ':';
+  static PERM_SEP = '_';
   constructor(permission_repr) {
-    const [entity, permissions] = permission_repr.split(this.ENTITY_SEP);
+    const [entity, permissions] = permission_repr.split(Entity.ENTITY_SEP);
     this.string_repr = permission_repr;
     this.entity = entity;
-    this.permissions = permissions.split(this.PERM_SEP)
+    this.permissions = permissions.split(Entity.PERM_SEP)
   }
 
   // isEqualTo(p) {
@@ -26,11 +26,32 @@ export class Entity {
     return this.permissions.length
   }
 }
+class RoleEntity extends Entity{
+  constructor(...params) {
+    super(...params)
+  }
+  updStringRepr() {
+    this.string_repr = `${this.entity}${Entity.ENTITY_SEP}${this.permissions.join(Entity.PERM_SEP)}`
+  }
+  removePerm(perm) {
+    const permIndex = this.permissions.findIndex(p => p === perm);
+    permIndex !== -1 && this.permissions.splice(permIndex, 1);
+    this.updStringRepr();
+  }
+  addPerm(perm) {
+    const permIndex = this.permissions.findIndex(p => p === perm);
+    permIndex === -1 && this.permissions.push(perm);
+    this.updStringRepr();
+  }
+  static buildRepr(entityName, ...perms) {
+    return `${entityName}${Entity.ENTITY_SEP}${perms.join(Entity.PERM_SEP)}`
+  }
+}
 export class Role {
   constructor({id, name, permissions}){
     this.id = id;
     this.name = name;
-    this.entities = permissions.map(p => new Entity(p));
+    this.entities = permissions.map(p => new RoleEntity(p));
   }
   /**
    * @param entity -> permiso
@@ -38,5 +59,22 @@ export class Role {
    * */
   hasPerm(entity) {
     return this.entities.some(E => E.entity === entity.entity && E.permissions.some(p => entity.permissions.filter(P => p === P)))
+  }
+  get amountPerms() {
+    return this.entities.reduce((carr, curr) => carr + curr.permissions.length, 0)
+  }
+  addEntity(entity, perm) {
+    this.entities.push(new RoleEntity(RoleEntity.buildRepr(entity.entity, perm)))
+  }
+  togglePerm(entity, permToToggle, value) {
+    // console.log('togglePerm', value, this, entity, permToToggle)
+    const e = this.entities.find(E => E.entity === entity.entity);
+    if (e) {
+      // console.log('found', e, value)
+      value ? e.addPerm(permToToggle) : e.removePerm(permToToggle)
+    }else {
+      this.addEntity(entity, permToToggle)
+      // console.log('poner', this.name, entity.entity, permToToggle)
+    }
   }
 }
