@@ -1,21 +1,12 @@
 import React, {Component} from "react";
+import Checkable from "./Checkable";
 
-class EntityHeaderCell extends Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      checked: false
-    };
-  }
-  onChangeCheckbox() {
-    const checked = !this.state.checked;
-    this.setState({checked});
-    this.props.toggle(checked);
-  }
+class EntityHeaderCell extends Checkable{
+
   render() {
     return <th key={this.props.entity.entity} colSpan={this.props.entity.cantPerms}>
       {this.props.entity.capitalizedEntity}
-      <input type="checkbox" checked={this.state.checked} onChange={() => this.onChangeCheckbox()}/>
+      {this.renderCheckbox()}
     </th>
   }
 }

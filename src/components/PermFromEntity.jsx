@@ -1,21 +1,11 @@
 import React, {Component} from "react";
+import Checkable from "./Checkable";
 
-class PermHeader extends Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      checked: false
-    };
-  }
-  onChangeCheckbox() {
-    const checked = !this.state.checked;
-    this.setState({checked});
-    this.props.toggle(checked);
-  }
+class PermHeader extends Checkable{
   render() {
     return <th>
       {this.props.perm}
-      <input type="checkbox" checked={this.state.checked} onChange={()=>this.onChangeCheckbox()}/>
+      {this.renderCheckbox()}
     </th>
   }
 }
