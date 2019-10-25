@@ -12,8 +12,7 @@ export class NewRoleInput extends Component {
   }
 
   render() {
-    return <tr>
-      <td colSpan={this.props.colspan}>
+    return <td colSpan={this.props.colspan}>
         <input type="text"
                value={this.state.value}
                onChange={(e) => {this.setState({value: e.target.value})}}
@@ -26,6 +25,5 @@ export class NewRoleInput extends Component {
                onBlur={()=>this.setState({placeholder: this.BASIC_PLACEHOLDER})}
                onFocus={()=>this.setState({placeholder: "Type the role name and press enter to confirm"})}/>
       </td>
-    </tr>
   }
 }

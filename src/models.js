@@ -61,11 +61,25 @@ export class Role {
   addEntity(entity, perm) {
     this.entities.push(new RoleEntity(RoleEntity.buildRepr(entity.entity, perm)))
   }
+  removePerm(e, permToToggle) {
+    e.removePerm(permToToggle);
+    if (!e.cantPerms) {
+      const eIndex = this.entities.findIndex(E => E.entity === e.entity);
+      eIndex !== -1 && this.entities.splice(eIndex, 1);
+    }
+  }
   togglePerm(entity, permToToggle, value) {
     const e = this.entities.find(E => E.entity === entity.entity);
     if (e)
-      value ? e.addPerm(permToToggle) : e.removePerm(permToToggle);
+      value ? e.addPerm(permToToggle) : this.removePerm(e, permToToggle);
     else
       this.addEntity(entity, permToToggle)
+  }
+  showRepr() {
+    console.log("============================");
+    console.log(this.name);
+    console.log('----------------------------');
+    console.log('id:', this.id)
+    console.log('permissions:', this.entities.map(e => e.string_repr).join(', '))
   }
 }

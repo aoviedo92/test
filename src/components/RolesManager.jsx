@@ -56,6 +56,10 @@ export class RolesManager extends Component {
       return {roles: state.roles, entities: state.entities}
     })
   }
+  save() {
+    console.log('-----------UPDATED ROLES---------------')
+    this.state.roles.forEach(r => r.showRepr())
+  }
   get amountEntityPerms() {
     return this.state.entities.reduce((carr, entity) => entity.cantPerms + carr, 0)
   }
@@ -75,7 +79,12 @@ export class RolesManager extends Component {
                  roles={this.state.roles}
                  onToggleFullRoleRow={(role, hasPerm)=>this.handleToggleFullRoleRow(role, hasPerm)}
                  onUpdRole={(role) => this.handleUpdRole(role)}/>
-        <NewRoleInput colspan={this.amountEntityPerms + 1} onAddNewRol={(newRoleName) => this.handleAddNewRol(newRoleName)}/>
+        <tr style={{borderTop: "1px solid"}}>
+          <NewRoleInput colspan={this.amountEntityPerms} onAddNewRol={(newRoleName) => this.handleAddNewRol(newRoleName)}/>
+          <td>
+            <button onClick={() => this.save()}>SAVE</button>
+          </td>
+        </tr>
       </tbody>
     </table>
   }
