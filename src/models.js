@@ -8,13 +8,6 @@ export class Entity {
     this.permissions = permissions.split(Entity.PERM_SEP)
   }
 
-  // isEqualTo(p) {
-  //   if (this.entity === p.entity){
-  //     const pSet = new Set(p.permissions);
-  //     return this.permissions.some(P => pSet.has(P))
-  //   }
-  //   return false;
-  // }
   capitalize(value) {
     const lower = value.toLowerCase();
     return lower.charAt(0).toUpperCase() + lower.slice(1);
@@ -71,7 +64,7 @@ export class Role {
   togglePerm(entity, permToToggle, value) {
     const e = this.entities.find(E => E.entity === entity.entity);
     if (e)
-      value ? e.addPerm(permToToggle) : e.removePerm(permToToggle)
+      value ? e.addPerm(permToToggle) : e.removePerm(permToToggle);
     else
       this.addEntity(entity, permToToggle)
   }
