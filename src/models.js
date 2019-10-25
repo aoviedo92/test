@@ -54,11 +54,13 @@ export class Role {
     this.entities = permissions.map(p => new RoleEntity(p));
   }
   /**
-   * @param entity -> permiso
+   * @param entity -> entity contains perms []
    * @type Entity
+   * @param permToToggle -> specific perm to chg
+   * @type String
    * */
-  hasPerm(entity) {
-    return this.entities.some(E => E.entity === entity.entity && E.permissions.some(p => entity.permissions.filter(P => p === P)))
+  hasPerm(entity, permToToggle) {
+    return this.entities.some(E => E.entity === entity.entity && E.permissions.some(p => p === permToToggle))
   }
   get amountPerms() {
     return this.entities.reduce((carr, curr) => carr + curr.permissions.length, 0)
@@ -67,14 +69,10 @@ export class Role {
     this.entities.push(new RoleEntity(RoleEntity.buildRepr(entity.entity, perm)))
   }
   togglePerm(entity, permToToggle, value) {
-    // console.log('togglePerm', value, this, entity, permToToggle)
     const e = this.entities.find(E => E.entity === entity.entity);
-    if (e) {
-      // console.log('found', e, value)
+    if (e)
       value ? e.addPerm(permToToggle) : e.removePerm(permToToggle)
-    }else {
+    else
       this.addEntity(entity, permToToggle)
-      // console.log('poner', this.name, entity.entity, permToToggle)
-    }
   }
 }

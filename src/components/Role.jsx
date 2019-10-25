@@ -28,7 +28,7 @@ export default class Role extends Component {
         <tr key={role.id}>
           <RoleHeader role={role} toggle={(checked) => this.props.onToggleFullRoleRow(role, checked)}/>
           {this.props.entities.map((entity, index) => entity.permissions.map((permToToggle, i) => {
-            const hasPerm = role.hasPerm(entity);
+            const hasPerm = role.hasPerm(entity, permToToggle);
             const key = `${role.name}-${entity.entity}-${index}-${i}`;
             return <ToggleablePerm key={key} hasPerm={hasPerm} onTogglePerm={()=>this.handleTogglePerm(role, entity, permToToggle, !hasPerm)}/>
           })
