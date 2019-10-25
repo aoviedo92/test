@@ -3,9 +3,12 @@ import Checkable from "./Checkable";
 
 class PermHeader extends Checkable{
   render() {
-    return <th>
+    const permTh = <>
       {this.props.perm}
       {this.renderCheckbox()}
+    </>;
+    return <th>
+      {this.renderOverableContent(permTh)}
     </th>
   }
 }

@@ -5,9 +5,12 @@ import Checkable from "./Checkable";
 class RoleHeader extends Checkable{
 
   render() {
-    return <td>
+    const roleTd = <>
       {this.props.role.name} ({this.props.role.amountPerms})
       {this.renderCheckbox()}
+    </>;
+    return <td>
+      {this.renderOverableContent(roleTd)}
     </td>
   }
 }

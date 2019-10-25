@@ -17,3 +17,7 @@
   padding: 5px;
   border: none;
 }
+
+input.toggleable-perms.no-show {
+  visibility: hidden;
+}
