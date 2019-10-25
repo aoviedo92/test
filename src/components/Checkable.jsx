@@ -1,10 +1,13 @@
 import React, {Component} from "react";
 
 export default class Checkable extends Component {
+  static defaultProps = {
+    checked: false
+  };
   constructor(props) {
     super(props);
     this.state = {
-      checked: false
+      checked: props.checked
     };
   }
   onChangeCheckbox() {

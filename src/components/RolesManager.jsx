@@ -4,6 +4,7 @@ import PermFromEntity from "./PermFromEntity";
 import RoleRow from "./Role";
 import {PERMISSIONS, ROLES} from "../mockData";
 import {Entity, Role} from "../models";
+import {NewRoleInput} from "./NewRoleInput";
 
 export class RolesManager extends Component {
   constructor(props) {
@@ -33,6 +34,15 @@ export class RolesManager extends Component {
       this.handleUpdRole(role);
     }))
   }
+  handleAddNewRol(newRoleName) {
+    const role = new Role({id: this.state.roles.length + 1, name: newRoleName, permissions: []});
+    role.checked = true; // manually handle full row checked
+    this.setState(state => {
+      state.roles.push(role);
+      return state;
+    }, () => this.handleToggleFullRoleRow(role, true))
+
+  }
   /**
    * @type Role
    * */
@@ -46,11 +56,14 @@ export class RolesManager extends Component {
       return {roles: state.roles, entities: state.entities}
     })
   }
+  get amountEntityPerms() {
+    return this.state.entities.reduce((carr, entity) => entity.cantPerms + carr, 0)
+  }
   render() {
     return <table className="table">
       <thead>
-      <tr className="bc">
-        <th rowSpan="2" className="bc1">Roles</th>
+      <tr>
+        <th rowSpan="2">Roles</th>
         <EntityHeader entities={this.state.entities} onToggleFullEntity={(entity, hasPerm)=>this.handleToggleFullEntity(entity, hasPerm)} />
       </tr>
       <tr>
@@ -62,6 +75,7 @@ export class RolesManager extends Component {
                  roles={this.state.roles}
                  onToggleFullRoleRow={(role, hasPerm)=>this.handleToggleFullRoleRow(role, hasPerm)}
                  onUpdRole={(role) => this.handleUpdRole(role)}/>
+        <NewRoleInput colspan={this.amountEntityPerms + 1} onAddNewRol={(newRoleName) => this.handleAddNewRol(newRoleName)}/>
       </tbody>
     </table>
   }
