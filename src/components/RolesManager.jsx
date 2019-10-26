@@ -38,13 +38,20 @@ export class RolesManager extends Component {
       this.handleUpdRole(role);
     }))
   }
+  handleToggleJustRead(role, hasPerm) {
+    this.state.entities.forEach(entity => entity.permissions.forEach(permToToggle => {
+      if (permToToggle.toUpperCase().includes('READ')) {
+        role.togglePerm(entity, permToToggle, hasPerm);
+        this.handleUpdRole(role);
+      }
+    }))
+  }
   handleAddNewRol(newRoleName) {
     const role = new Role({id: this.state.roles.length + 1, name: newRoleName, permissions: []});
-    role.checked = true; // manually handle full row checked
     this.setState(state => {
       state.roles.push(role);
       return state;
-    }, () => this.handleToggleFullRoleRow(role, true))
+    }, () => this.handleToggleJustRead(role, true))
 
   }
   /**
