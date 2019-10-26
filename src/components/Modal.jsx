@@ -16,6 +16,8 @@ export default class Modal extends Component {
       background: #937c7c85;
     `;
     const ModalContent = styled.div`
+      transition: all 2s ease;
+      opacity: 1;
       margin: 0 auto;
       width: 80%;
       background: #fff;
@@ -51,7 +53,7 @@ export default class Modal extends Component {
     </Tile>
     );
     return <ModalOverlay onClick={()=>this.props.onClose()}>
-      <ModalContent>
+      <ModalContent className="fade-in">
         <h2 style={{borderBottom: '1px solid #eee', fontWeight: 1, textAlign: 'center', padding: 5, margin: 0}}>Updated Roles</h2>
         <ScrollableContent>
         {this.props.roles.map(r => <RoleSummTile role={r} key={r.id}/>)}
