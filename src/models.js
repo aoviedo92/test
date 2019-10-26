@@ -1,6 +1,6 @@
 export class Entity {
   static ENTITY_SEP = ':';
-  static PERM_SEP = '_';
+  static PERM_SEP = ';';
   constructor(permission_repr) {
     const [entity, permissions] = permission_repr.split(Entity.ENTITY_SEP);
     this.string_repr = permission_repr;
@@ -9,7 +9,7 @@ export class Entity {
   }
 
   capitalize(value) {
-    const lower = value.toLowerCase();
+    const lower = value.toLowerCase().replace(/_/g, ' ');
     return lower.charAt(0).toUpperCase() + lower.slice(1);
   }
   get capitalizedEntity() {
