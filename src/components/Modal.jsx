@@ -50,7 +50,7 @@ export default class Modal extends Component {
     const RoleSummTile = ({role}) => (
     <Tile>
       <p>{role.name} <span className="id">ID: {role.id}</span></p>
-      <p>Permissions: <span className="id">{role.entities.map(e => e.string_repr).join(', ')}</span></p>
+      <p>Permissions: <span className="id">{role.entities.map(e => e.string_repr).join(', ') || 'No permissions assigned.'}</span></p>
     </Tile>
     );
     return <ModalOverlay onClick={()=>this.closeModal()} className={!this.state.show&&'fade-out'}>
