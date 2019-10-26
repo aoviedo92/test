@@ -43,19 +43,32 @@ body{
 input.toggleable-perms.no-show {
   visibility: hidden;
 }
-
 .fade-in {
   opacity: 1;
   animation-name: fadeInOpacity;
   animation-timing-function: ease-in;
   animation-duration: .3s;
 }
-
 @keyframes fadeInOpacity {
   0% {
     opacity: 0;
   }
   100% {
     opacity: 1;
+  }
+}
+.fade-out {
+  opacity: 1;
+  animation-name: fadeOutOpacity;
+  animation-timing-function: ease-out;
+  animation-duration: .2s;
+}
+
+@keyframes fadeOutOpacity {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
