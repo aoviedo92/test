@@ -17,7 +17,7 @@ export default class PermFromEntity extends Component {
   render() {
     return (
       this.props.entities.map(entity => entity.permissions.map(p =>
-        <PermHeader key={p} perm={p} toggle={(checked) => this.props.onToggleFullPerm(entity, p, checked)} />
+        <PermHeader key={p} perm={entity.capitalize(p)} toggle={(checked) => this.props.onToggleFullPerm(entity, p, checked)} />
       ))
     )
   }
