@@ -9,7 +9,7 @@ class RoleHeader extends Checkable{
       {this.props.role.name} ({this.props.role.amountPerms})
       {this.renderCheckbox()}
     </>;
-    return <td>
+    return <td className="fixed-col" style={{backgroundColor: 'rgb(226,226,226)'}}>
       {this.renderOverableContent(roleTd)}
     </td>
   }

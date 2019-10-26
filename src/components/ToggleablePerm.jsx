@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import styled from 'styled-components';
 
 export class ToggleablePerm extends Component {
   constructor(props) {
@@ -7,6 +8,10 @@ export class ToggleablePerm extends Component {
   }
 
   render() {
-    return <td onClick={()=>this.props.onTogglePerm()}>{this.props.hasPerm ? 'X':'-'}</td>
+    const Td = styled.td`
+      text-align: center;
+      cursor: pointer;
+    `;
+    return <Td onClick={()=>this.props.onTogglePerm()}>{this.props.hasPerm ? 'X':'-'}</Td>
   }
 }

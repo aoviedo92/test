@@ -5,6 +5,8 @@ import RoleRow from "./Role";
 import {PERMISSIONS, ROLES} from "../mockData";
 import {Entity, Role} from "../models";
 import {NewRoleInput} from "./NewRoleInput";
+import styled from 'styled-components';
+
 
 export class RolesManager extends Component {
   constructor(props) {
@@ -64,10 +66,25 @@ export class RolesManager extends Component {
     return this.state.entities.reduce((carr, entity) => entity.cantPerms + carr, 0)
   }
   render() {
+    const Button = styled.button`
+      :hover {
+        background-color: rgba(40, 33, 31, 0.22);
+        color: #333;
+        transition: all .5s ease-out;
+      }
+      transition: all .2s ease-in;
+      border-radius: 3px;
+      border: none;
+      color: #fff;
+      background-color: #28211f;
+      padding: 5px 1em;
+      width: 100%;
+      cursor: pointer;
+    `;
     return <table className="table">
       <thead>
       <tr>
-        <th rowSpan="2">Roles</th>
+        <th rowSpan="2" style={{width: 150}} className="fixed-header fixed-col">Roles</th>
         <EntityHeader entities={this.state.entities} onToggleFullEntity={(entity, hasPerm)=>this.handleToggleFullEntity(entity, hasPerm)} />
       </tr>
       <tr>
@@ -79,10 +96,10 @@ export class RolesManager extends Component {
                  roles={this.state.roles}
                  onToggleFullRoleRow={(role, hasPerm)=>this.handleToggleFullRoleRow(role, hasPerm)}
                  onUpdRole={(role) => this.handleUpdRole(role)}/>
-        <tr style={{borderTop: "1px solid"}}>
+        <tr>
           <NewRoleInput colspan={this.amountEntityPerms} onAddNewRol={(newRoleName) => this.handleAddNewRol(newRoleName)}/>
           <td>
-            <button onClick={() => this.save()}>SAVE</button>
+            <Button onClick={() => this.save()}>SAVE</Button>
           </td>
         </tr>
       </tbody>

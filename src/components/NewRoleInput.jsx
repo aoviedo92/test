@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-
+import Input from './styled/input'
 export class NewRoleInput extends Component {
   BASIC_PLACEHOLDER = "Add new role...";
 
@@ -13,7 +13,7 @@ export class NewRoleInput extends Component {
 
   render() {
     return <td colSpan={this.props.colspan}>
-        <input type="text"
+        <Input type="text"
                value={this.state.value}
                onChange={(e) => {this.setState({value: e.target.value})}}
                placeholder={this.state.placeholder}

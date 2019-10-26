@@ -7,7 +7,7 @@ class PermHeader extends Checkable{
       {this.props.perm}
       {this.renderCheckbox()}
     </>;
-    return <th>
+    return <th className="fixed-header-2l">
       {this.renderOverableContent(permTh)}
     </th>
   }

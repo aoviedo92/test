@@ -8,7 +8,7 @@ class EntityHeaderCell extends Checkable{
       {this.props.entity.capitalizedEntity}
       {this.renderCheckbox()}
     </>;
-    return <th key={this.props.entity.entity} colSpan={this.props.entity.cantPerms}>
+    return <th key={this.props.entity.entity} colSpan={this.props.entity.cantPerms} className="fixed-header">
       {this.renderOverableContent(entityTh)}
     </th>;
   }
