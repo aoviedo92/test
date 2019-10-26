@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import EntityHeader from "./Entity";
 import PermFromEntity from "./PermFromEntity";
 import RoleRow from "./Role";
+import Modal from "./Modal";
 import {PERMISSIONS, ROLES} from "../mockData";
 import {Entity, Role} from "../models";
 import {NewRoleInput} from "./NewRoleInput";
@@ -12,6 +13,7 @@ export class RolesManager extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showRolesSummary: false,
       entities: [],
       roles: []
     };
@@ -61,6 +63,7 @@ export class RolesManager extends Component {
   save() {
     console.log('-----------UPDATED ROLES---------------')
     this.state.roles.forEach(r => r.showRepr())
+    this.setState({showRolesSummary: true})
   }
   get amountEntityPerms() {
     return this.state.entities.reduce((carr, entity) => entity.cantPerms + carr, 0)
@@ -81,7 +84,8 @@ export class RolesManager extends Component {
       width: 100%;
       cursor: pointer;
     `;
-    return <table className="table">
+    const ModalSummary = () => this.state.showRolesSummary && <Modal roles={this.state.roles}/>;
+    return <><ModalSummary/><table className="table">
       <thead>
       <tr>
         <th rowSpan="2" style={{width: 150}} className="fixed-col">Roles</th>
@@ -103,6 +107,6 @@ export class RolesManager extends Component {
           </td>
         </tr>
       </tbody>
-    </table>
+    </table></>
   }
 }
