@@ -50,11 +50,11 @@ export default class Modal extends Component {
       <p>Permissions: <span className="id">{role.entities.map(e => e.string_repr).join(', ')}</span></p>
     </Tile>
     );
-    return <ModalOverlay onClick={this.props}>
+    return <ModalOverlay onClick={()=>this.props.onClose()}>
       <ModalContent>
         <h2 style={{borderBottom: '1px solid #eee', fontWeight: 1, textAlign: 'center', padding: 5, margin: 0}}>Updated Roles</h2>
         <ScrollableContent>
-        {this.props.roles.map(r => <RoleSummTile role={r}/>)}
+        {this.props.roles.map(r => <RoleSummTile role={r} key={r.id}/>)}
         </ScrollableContent>
         <Footer>Click again to exit...</Footer>
       </ModalContent>

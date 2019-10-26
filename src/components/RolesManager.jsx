@@ -84,8 +84,8 @@ export class RolesManager extends Component {
       width: 100%;
       cursor: pointer;
     `;
-    const ModalSummary = () => this.state.showRolesSummary && <Modal roles={this.state.roles}/>;
-    return <><ModalSummary/><table className="table">
+    const ModalSummary = () => this.state.showRolesSummary && <Modal roles={this.state.roles} onClose={()=>this.setState({showRolesSummary: false})}/>;
+    return <><ModalSummary /><table className="table">
       <thead>
       <tr>
         <th rowSpan="2" style={{width: 150}} className="fixed-col">Roles</th>
