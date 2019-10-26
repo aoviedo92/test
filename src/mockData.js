@@ -89,36 +89,6 @@ export const ROLES = [
     name: "Role 63",
     permissions: ['ACCOUNT:READ_ACCESS', 'ENTITY2:PERM 1_PERM 2_PERM 3']
   },
-  {
-    id: "ogdb33RJ05el2A",
-    name: "Role 51",
-    permissions: ['ACCOUNT:READ_ACCESS', 'STORE:READ', 'PROJECT:WRITE']
-  },
-  {
-    id: "Z1z1vNC4vRy7hF",
-    name: "Role 42",
-    permissions: ['ENTITY1:PERM 1_PERM 2_PERM 3', 'ENTITY2:PERM 1_PERM 2_PERM 3']
-  },
-  {
-    id: "LI6rMPm4ykXbfd",
-    name: "Role 43",
-    permissions: ['ACCOUNT:READ_ACCESS', 'ENTITY2:PERM 1_PERM 2_PERM 3']
-  },
-  {
-    id: "ogdb33RJ30el2A",
-    name: "Role 31",
-    permissions: ['ACCOUNT:READ_ACCESS', 'STORE:READ', 'PROJECT:WRITE']
-  },
-  {
-    id: "Z1z1vNC2vRy7hF",
-    name: "Role 222",
-    permissions: ['ENTITY1:PERM 1_PERM 2_PERM 3', 'ENTITY2:PERM 1_PERM 2_PERM 3']
-  },
-  {
-    id: "LI6rMPmy1kXbfd",
-    name: "Role 13",
-    permissions: ['ACCOUNT:READ_ACCESS', 'ENTITY2:PERM 1_PERM 2_PERM 3']
-  },
 ];
 
 export const PERMISSIONS = [

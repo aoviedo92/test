@@ -8,12 +8,10 @@ body{
   margin: 0;
 }
 .table {
-  /*border: 1px solid;*/
   border-collapse: collapse;
   table-layout: fixed;
   width: 100%;
   min-width: 1000px;
-  /*border: 1px solid #dee2e6;*/
 }
 .table thead {
   color: #fff;
@@ -29,19 +27,6 @@ body{
   font-weight: lighter;
   background-color: #4b4341;
 }
-
-/*th.fixed-header {*/
-/*  position: -webkit-sticky;*/
-/*  position: sticky;*/
-/*  top: 0px;*/
-/*  z-index: 3;*/
-/*}*/
-/*th.fixed-header-2l {*/
-/*  position: -webkit-sticky;*/
-/*  position: sticky;*/
-/*  top: 28.5px;*/
-/*  z-index: 3;*/
-/*}*/
 .fixed-col {
   position: -webkit-sticky;
   position: sticky;

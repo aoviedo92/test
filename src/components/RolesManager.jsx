@@ -84,7 +84,7 @@ export class RolesManager extends Component {
     return <table className="table">
       <thead>
       <tr>
-        <th rowSpan="2" style={{width: 150}} className="fixed-header fixed-col">Roles</th>
+        <th rowSpan="2" style={{width: 150}} className="fixed-col">Roles</th>
         <EntityHeader entities={this.state.entities} onToggleFullEntity={(entity, hasPerm)=>this.handleToggleFullEntity(entity, hasPerm)} />
       </tr>
       <tr>
